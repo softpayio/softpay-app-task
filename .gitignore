@@ -5,8 +5,7 @@
 !/.idea/codeStyles
 !/.idea/dictionaries
 .DS_Store
-/build
-/build/
+build
 /captures
 .externalNativeBuild
 .cxx
