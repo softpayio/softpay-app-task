@@ -10,9 +10,17 @@ interface TransactionManager {
 }
 
 data class Transaction(
+    val referenceId: String?,
     val amount: Long?,
     val state: State,
+    val store: Store?,
     val isFinal: Boolean
+)
+
+data class Store(
+    val name: String,
+    val address: String,
+    val postalCode: String
 )
 
 enum class State {
