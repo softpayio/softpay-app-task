@@ -1,9 +1,6 @@
 package io.softpay.sdk.impl
 
-import io.softpay.sdk.Input
-import io.softpay.sdk.State
-import io.softpay.sdk.Transaction
-import io.softpay.sdk.TransactionManager
+import io.softpay.sdk.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,9 +18,11 @@ class TransactionManagerImpl : TransactionManager, CoroutineScope {
         check(currentFlow == null || currentFlow.value.isFinal) { "There is already an ongoing transaction!" }
         return MutableStateFlow(
             Transaction(
-                amount = null,
                 state = State.PROCESSING,
-                isFinal = false
+                amount = null,
+                isFinal = false,
+                referenceId = null,
+                store = null
             )
         ).also {
             stateFlow = it
@@ -44,7 +43,12 @@ class TransactionManagerImpl : TransactionManager, CoroutineScope {
                     delay(1000)
                     currentFlow.update { copy(amount = input.value, state = State.PROCESSING) }
                     delay(1000)
-                    currentFlow.update { copy(state = State.AWAITING_CONFIRMATION) }
+                    currentFlow.update {
+                        copy(
+                            state = State.AWAITING_CONFIRMATION,
+                            store = generateStore()
+                        )
+                    }
                 }
             }
             is Input.Confirm -> {
@@ -55,6 +59,7 @@ class TransactionManagerImpl : TransactionManager, CoroutineScope {
                     delay(1000)
                     currentFlow.update {
                         copy(
+                            referenceId = "424da38c0242ac120002",
                             isFinal = true,
                             state = if (input.value) State.SUCCESS else State.FAILURE
                         )
@@ -68,6 +73,13 @@ class TransactionManagerImpl : TransactionManager, CoroutineScope {
             }
         }
     }
+
+    private fun generateStore(): Store =
+        Store(
+            name = "Big Kahuna Burger",
+            address = "Pulp fiction st. 28, 94",
+            postalCode = "2100"
+        )
 
     private fun MutableStateFlow<Transaction>.update(block: Transaction.() -> Transaction) {
         value = block(value)
