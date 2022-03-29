@@ -1,4 +1,4 @@
-# Test SofPOS project
+# SoftPOS test project
 This project consists of `TransactionManager` interface and its dummy implementation `TransactionManagerImpl`
 that mocks making a transaction.
 To make start a transaction you should first get a new transaction flow through `TransactionManager.newFlow()`.
@@ -19,7 +19,6 @@ To get better understanding of how everything works checkout the documentations 
 ## Things to keep in mind
 As you can see there are not much repository or business layer code needed for this task, so our main focus
 is going to be on View layer. We will particularly evaluate these points:
-- Do *NOT* use the soft keyboard to get the amount input from the user, you should make an amount keyboard yourself.
 - How polished the code is. It needs to be written in Kotlin.
 - Having a smooth UI with some animations including transitions between the screens are really important. Use the UX points you learned to make the screens user friendly.
 - The app should be able to rotate. This way we can know you have a good understanding of Android lifecycles.
