@@ -33,43 +33,39 @@ class TransactionManagerImpl : TransactionManager, CoroutineScope {
         }
     }
 
-    override fun dispatch(input: Input) {
+    override suspend fun dispatch(input: Input) {
         val currentFlow = stateFlow
         checkNotNull(currentFlow) { "Start a transaction first!" }
         when (input) {
             is Input.Amount -> {
-                launch {
-                    require(currentFlow.value.state == State.AWAITING_AMOUNT) { "The flow is not awaiting an amount!" }
-                    delay(1000)
-                    currentFlow.update { copy(amount = input.value, state = State.PROCESSING) }
-                    delay(1000)
-                    currentFlow.update {
-                        copy(
-                            state = State.AWAITING_CONFIRMATION,
-                            store = generateStore()
-                        )
-                    }
+                require(currentFlow.value.state == State.AWAITING_AMOUNT) { "The flow is not awaiting an amount!" }
+                delay(1000)
+                currentFlow.update { copy(amount = input.value, state = State.PROCESSING) }
+                delay(1000)
+                currentFlow.update {
+                    copy(
+                        state = State.AWAITING_CONFIRMATION,
+                        store = generateStore()
+                    )
                 }
             }
             is Input.Confirm -> {
-                launch {
-                    require(currentFlow.value.state == State.AWAITING_CONFIRMATION) { "The flow is not awaiting confirmation!" }
-                    delay(1000)
-                    currentFlow.update { copy(state = State.PROCESSING) }
-                    delay(1000)
-                    currentFlow.update {
-                        copy(
-                            referenceId = "424da38c0242ac120002",
-                            isFinal = true,
-                            state = if (input.value) State.SUCCESS else State.FAILURE
-                        )
-                    }
+                require(currentFlow.value.state == State.AWAITING_CONFIRMATION) { "The flow is not awaiting confirmation!" }
+                delay(1000)
+                currentFlow.update { copy(state = State.PROCESSING) }
+                delay(1000)
+                currentFlow.update {
+                    copy(
+                        referenceId = "424da38c0242ac120002",
+                        isFinal = true,
+                        state = if (input.value) State.SUCCESS else State.FAILURE
+                    )
                 }
             }
             Input.Cancel -> {
                 require(currentFlow.value.isFinal.not()) { "The flow is in Final state!" }
                 currentFlow.update { copy(isFinal = true, state = State.CANCELLED) }
-                cancel("Flow is canceled")
+                coroutineContext.cancel()
             }
         }
     }
