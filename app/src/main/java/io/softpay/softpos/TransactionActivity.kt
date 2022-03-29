@@ -1,5 +1,5 @@
 package io.softpay.softpos
 
-import android.app.Activity
+import androidx.activity.ComponentActivity
 
-class TransactionActivity : Activity()
+class TransactionActivity : ComponentActivity()
