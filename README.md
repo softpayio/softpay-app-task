@@ -26,5 +26,5 @@ is going to be on View layer. We will particularly evaluate these points:
 - Make sure to have an error/exception handling mechanism to prevent the app from crashing.
 - Remember that you should use the mocked implementation of `TransactionManager` for this task like so:
 ```
-val transactionManager = TransactionManagerImpl()
+val transactionManager: TransactionManager = TransactionManagerImpl()
 ```
