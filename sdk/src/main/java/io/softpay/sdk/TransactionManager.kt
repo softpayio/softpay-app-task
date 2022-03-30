@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.Flow
 interface TransactionManager {
 
     /**
-     * Starts a new transaction flow. To get notified about the [state][State] of transaction
-     * this flow needs to be collected.
+     * Starts a new transaction flow. To get notified about the [state][State] of the transaction
+     * this flow should be collected.
      */
     fun newTransactionFlow(): Flow<Transaction>
 
@@ -26,7 +26,7 @@ interface TransactionManager {
 }
 
 /**
- * Represents a snapshot of the ongoing transaction is a transaction flow.
+ * Represents a snapshot of an ongoing transaction in a transaction flow.
  */
 data class Transaction(
 
@@ -46,7 +46,7 @@ data class Transaction(
     val state: State,
 
     /**
-     * The [store][Store] this transaction is happening in. Only set when the state is [State.AWAITING_CONFIRMATION].
+     * The [store][Store] in which this transaction is happening in. Only set when the state is [State.AWAITING_CONFIRMATION].
      */
     val store: Store?,
 
