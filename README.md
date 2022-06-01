@@ -1,7 +1,7 @@
 # SoftPOS test project
 This project consists of `TransactionManager` interface and its dummy implementation `TransactionManagerImpl`
 that mocks making a transaction.
-To start a transaction you should first get a new transaction flow through `TransactionManager.newFlow()`.
+To start a transaction you should first get a new transaction flow through `TransactionManager.newTransactionFlow()`.
 Using this flow you can get notified about the state of a `Transaction` goes through and what the flow needs in
 order to continue and complete. Required information can be passed as `Input`s to the flow using `TransactionManager.dispatch()`.
 
