@@ -3,14 +3,16 @@
     package="io.softpay.softpos">
 
     <application
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".Application"
         android:theme="@style/Theme.SoftPOS">
+
         <activity
-            android:name=".TransactionActivity"
+            android:name=".presentation.TransactionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

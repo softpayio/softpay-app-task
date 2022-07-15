@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SoftPOS</string>
+    <string name="desc_softpay_logo">Softpay logo</string>
+    <string name="app_image_poster">"Application Image "</string>
+    <string name="company_slogan" >Make any device a payment terminal</string>
+    <string name="company_description" >With Softpay, you are integrated out-of-the-box \n with our many partners in the market.</string>
+    <string name="web_address">www.softpay.io</string>
+    <string name="start">Start</string>
+    <string name="back">back icon</string>
+    <string name="enter_amount">Please enter the amount …</string>
+    <string name="confirm_shopping_text">Do you want to continue shopping?</string>
 </resources>
