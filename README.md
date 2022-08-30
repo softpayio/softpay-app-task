@@ -8,13 +8,14 @@ The flow would need some input in order to continue and complete. These inputs c
 To get a better understanding of how everything works checkout the documentations on `TransactionManager.kt`.
 
 ## What the task is?
-1. Fork this project.
+1. Download this project.
 2. Inside the app module create a `TransactionActivity` with these screens:
 3. Create a loading screen that should be shown whenever the state of the `Transaction` is in `PROCESSING`.
 4. Create a screen for the user to enter an amount when the state is `AWAITING_AMOUNT` and then dispatch it into the flow.
 5. Create a screen to show the `Store` details with the amount and a confirmation button when the state is `AWAITING_CONFIRMATION`.
-6. Create a screen to show the final state of the transaction, weather it's a success or a failure, and to show the details of the transaction including its `referenceId`.
+6. Create a screen to show the final state of the transaction, whether it's a success or a failure, and to show the details of the transaction including its `referenceId`.
 7. Make sure you give the user the ability to cancel the transaction when they want before the state is final.
+8. When you're finished with this task, send us your changes in a zip file.
 
 ## Things to keep in mind
 As you can see there is not much repository or business layer code needed for this task, so our main focus
